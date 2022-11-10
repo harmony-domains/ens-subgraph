@@ -10,9 +10,8 @@ dataSources:
     name: ENSRegistry
     network: mainnet
     source:
-      address: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+      address: "0x26D48976E632db19b967A329a2a21Dd0487C1Ec7"
       abi: EnsRegistry
-      startBlock: 210
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -35,38 +34,11 @@ dataSources:
         - event: "NewTTL(indexed bytes32,uint64)"
           handler: handleNewTTL
   - kind: ethereum/contract
-    name: LegacyENSRegistry
-    network: mainnet
-    source:
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
-      abi: EnsRegistry
-      startBlock: 210
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      file: ./src/ensRegistry.ts
-      entities:
-        - Domain
-        - Account
-        - Resolver
-      abis:
-        - name: EnsRegistry
-          file: ./abis/Registry.json
-      eventHandlers:
-        - event: "Transfer(indexed bytes32,address)"
-          handler: handleTransferOldRegistry
-        - event: "NewOwner(indexed bytes32,indexed bytes32,address)"
-          handler: handleNewOwnerOldRegistry
-        - event: "NewResolver(indexed bytes32,address)"
-          handler: handleNewResolverOldRegistry
-        - event: "NewTTL(indexed bytes32,uint64)"
-          handler: handleNewTTLOldRegistry
-  - kind: ethereum/contract
-    name: PublicResolver
+    name: Resolver
     network: mainnet
     source:
       abi: Resolver
+      address: "0xA78a7c2505945C929A02f6ee02D5A708995D4bcE"
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -114,9 +86,8 @@ dataSources:
     name: BaseRegistrarImplementation
     network: mainnet
     source:
-      address: "0x4A679253410272dd5232B3Ff7cF5dbB88f295319"
+      address: "0x5fa0Eb176DaD9F897A64a7F7dE7981BCE357C0b4"
       abi: BaseRegistrar
-      startBlock: 210
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -138,34 +109,11 @@ dataSources:
         - event: "Transfer(indexed address,indexed address,indexed uint256)"
           handler: handleNameTransferred
   - kind: ethereum/contract
-    name: LegacyETHRegistrarController
-    network: mainnet
-    source:
-      address: "0x1613beB3B2C4f22Ee086B2b38C1476A3cE7f78E8"
-      abi: EthRegistrarControllerOld
-      startBlock: 210
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      file: ./src/ethRegistrar.ts
-      entities:
-        - Registration
-      abis:
-        - name: EthRegistrarControllerOld
-          file: ./abis/EthRegistrarControllerOld.json
-      eventHandlers:
-        - event: >-
-            NameRegistered(string,indexed bytes32,indexed
-            address,uint256,uint256)
-          handler: handleNameRegisteredByControllerOld
-        - event: "NameRenewed(string,indexed bytes32,uint256,uint256)"
-          handler: handleNameRenewedByController
-  - kind: ethereum/contract
     name: EthRegistrarController
     network: mainnet
     source:
       abi: EthRegistrarController
+      address: "0xFbd855EaD0DaBeD9C1dBF48B049434fD2e6B02cE"
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -188,6 +136,7 @@ dataSources:
     network: mainnet
     source:
       abi: NameWrapper
+      address: "0xe39048A28b1ed94606F2839AB92a1f7B26A3eB4F"
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
